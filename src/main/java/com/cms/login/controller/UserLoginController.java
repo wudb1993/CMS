@@ -1,4 +1,4 @@
-package com.login.controller;
+package com.cms.login.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

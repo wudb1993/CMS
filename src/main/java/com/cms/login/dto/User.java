@@ -1,4 +1,4 @@
-package com.login.dto;
+package com.cms.login.dto;
 
 import java.util.Date;
 
