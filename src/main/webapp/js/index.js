@@ -223,6 +223,7 @@ layui.config({
 				buttonName:"系统公告"
 			},
 			success: function(data){
+				console.log(data.model.userLoginInfo);
                 layer.open({
                     type: 1,
                     title: "系统公告",

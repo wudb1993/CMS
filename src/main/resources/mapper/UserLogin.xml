@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="userLogin">
+<mapper namespace="user">
+
+    <select id="userLogin" parameterType="map" resultType="com.cms.login.dto.User">
+        select * from pp_user_regist_info
+        where userName =#{userName}
+        and loginPwd = #{loginPwd}
+    </select>
 
 
 </mapper>
