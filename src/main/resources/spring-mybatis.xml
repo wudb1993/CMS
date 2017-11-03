@@ -41,9 +41,9 @@
         <!--&lt;!&ndash; 自动扫描mapping.xml文件 &ndash;&gt;-->
         <property name="mapperLocations" value="classpath:mapper/*.xml"></property>
     </bean>
-    <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
-        <constructor-arg index="0" ref="sqlSessionFactory" />
-    </bean>
+    <!--<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">-->
+        <!--<constructor-arg index="0" ref="sqlSessionFactory" />-->
+    <!--</bean>-->
   <!--  &lt;!&ndash; DAO接口所在包名，Spring会自动查找其下的类 &ndash;&gt;-->
   <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="com.cms" />

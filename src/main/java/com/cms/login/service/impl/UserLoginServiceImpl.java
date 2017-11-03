@@ -13,13 +13,13 @@ import java.util.Map;
  * @author  矜持的折返跑
  * @date 2017-11-02
  */
-@Service("userLoginService")
+@Service("userLoginServiceImpl")
 public class UserLoginServiceImpl implements UserLoginService {
     @Autowired
-    private UserLoginDao userLoginDao;
+    private UserLoginDao userLoginDaoImpl;
     @Override
     public User userLogin(Map<String, Object> userLogin) {
-      User userLoginInfo =  userLoginDao.userLoginInfo(userLogin);
+      User userLoginInfo =  userLoginDaoImpl.userLoginInfo(userLogin);
         return userLoginInfo;
     }
 }

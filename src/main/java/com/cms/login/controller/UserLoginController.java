@@ -21,7 +21,7 @@ import java.util.Map;
 public class UserLoginController {
 
     @Autowired
-    private UserLoginService userLoginService;
+    private UserLoginService userLoginServiceImpl;
     @RequestMapping(value="/login")
     @ResponseBody
     public ModelAndView userLogin(@RequestParam String userName,@RequestParam String loginPwd){
@@ -30,8 +30,13 @@ public class UserLoginController {
         Map<String,Object> userLoginMap = new HashMap<String,Object>();
         userLoginMap.put("userName",userName);
         userLoginMap.put("loginPwd",loginPwd);
-        User user = userLoginService.userLogin(userLoginMap);
-        mv.addObject("result","success");
+        User user = userLoginServiceImpl.userLogin(userLoginMap);
+        if(user!=null&&!"".equals(user)){
+            mv.addObject("result","success");
+        }else {
+            mv.addObject("result","false");
+        }
+
         mv.addObject("userLoginInfo",user);
 
         return mv;

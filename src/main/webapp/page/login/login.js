@@ -28,8 +28,15 @@ layui.config({
             },
             dataType:"json",
             success:function(data){
-console.log(data);
-location.href = '/index.html';
+                if(data.model.result=='success'){
+                    location.href = '/index.html';
+                }else{
+                    layer.tips("asdas",'#userName',
+                        {
+                            tips: [1, '#c012']
+                        });
+                }
+
             },
 
         })
