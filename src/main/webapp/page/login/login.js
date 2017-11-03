@@ -31,10 +31,18 @@ layui.config({
                 if(data.model.result=='success'){
                     location.href = '/index.html';
                 }else{
-                    layer.tips("asdas",'#userName',
-                        {
-                            tips: [1, '#c012']
-                        });
+                    if(data.model.result==1){
+                        layer.tips("密码不对啊大兄弟，再猜猜？",'#loginPwd',
+                            {
+                                tips: [2, '#FF82AB']
+                            });
+                    }
+                    if(data.model.result==2){
+                        layer.tips("用户名都不对啊，大兄弟",'#userName',
+                            {
+                                tips: [2, '#FF82AB']
+                            });
+                    }
                 }
 
             },

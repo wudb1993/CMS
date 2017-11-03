@@ -31,14 +31,17 @@ public class UserLoginController {
         userLoginMap.put("userName",userName);
         userLoginMap.put("loginPwd",loginPwd);
         User user = userLoginServiceImpl.userLogin(userLoginMap);
-        if(user!=null&&!"".equals(user)){
-            mv.addObject("result","success");
+
+        if(null!=user&&!"".equals(user)){
+            if(loginPwd.equals(user.getLoginPwd())){
+                mv.addObject("result","success");
+            }else{
+                mv.addObject("result","1");//密码不对头
+            }
         }else {
-            mv.addObject("result","false");
+            mv.addObject("result","2");//用户不存在
         }
-
         mv.addObject("userLoginInfo",user);
-
         return mv;
 
     }

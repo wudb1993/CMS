@@ -5,7 +5,6 @@
     <select id="userLogin" parameterType="map" resultType="com.cms.login.dto.User">
         select * from pp_user_regist_info
         where userName =#{userName}
-        and loginPwd = #{loginPwd}
     </select>
 
 
