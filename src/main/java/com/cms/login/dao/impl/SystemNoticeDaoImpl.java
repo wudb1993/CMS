@@ -13,7 +13,7 @@ import java.util.Map;
  * @author 矜持的折返跑
  * @date 2017-11-03
  */
-@Repository(value="systemNoticeDao")
+@Repository(value="systemNoticeDaoImpl")
 public class SystemNoticeDaoImpl extends BaseDaoImpl<Article,Long> implements SystemNoticeDao{
     /**
      * 系统公告

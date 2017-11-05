@@ -19,5 +19,5 @@ public interface SystemNoticeService {
      * @param articleMap
      * @return
      */
-    List<Article> queryArticel(Map<String,Object> articleMap);
+    List<Article> queryArticle(Map<String,Object> articleMap);
 }

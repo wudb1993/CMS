@@ -3,8 +3,11 @@
 <mapper namespace="article">
 
     <select id="querySystemArticle" parameterType="map" resultType="com.cms.login.dto.Article">
-        select * from pp_system_article
+        select * from pp_article_info
         where noticeType =#{noticeType}
+        <if test="title!=null and title!=''">
+            and title LIKE concat('%',#{title},'%')
+        </if>
     </select>
 
 

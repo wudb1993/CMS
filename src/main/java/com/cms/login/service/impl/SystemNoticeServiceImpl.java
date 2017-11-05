@@ -17,7 +17,7 @@ import java.util.Map;
 @Service(value="systemNoticeService")
 public class SystemNoticeServiceImpl implements SystemNoticeService{
     @Autowired
-    private SystemNoticeDao systemNoticeDao;
+    private SystemNoticeDao systemNoticeDaoImpl;
 
     /**
      * 查询系统公告
@@ -25,8 +25,8 @@ public class SystemNoticeServiceImpl implements SystemNoticeService{
      * @return
      */
     @Override
-    public List<Article> queryArticel(Map<String,Object> articelMap) {
-        List<Article> articleList = systemNoticeDao.queryNotice(articelMap);
+    public List<Article> queryArticle(Map<String,Object> articelMap) {
+        List<Article> articleList = systemNoticeDaoImpl.queryNotice(articelMap);
         return articleList;
     }
 }

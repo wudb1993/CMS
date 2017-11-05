@@ -10,6 +10,7 @@ import java.util.Date;
 public class Article {
     private String id;
     private String title;//标题
+    private String userId;//作者ID
     private String author;//作者
     private String content;//详情
     private String general;//概要
@@ -17,7 +18,8 @@ public class Article {
     private String status;//状态
     private String operMan;//审核人
     private Date operTime; //审核时间
-    private String noticeType;
+    private String noticeType;//文章类型
+    private String operId;//操作员ID
 
 
     public Date getOperTime() {
@@ -98,5 +100,13 @@ public class Article {
 
     public void setNoticeType(String noticeType) {
         this.noticeType = noticeType;
+    }
+
+    public String getOperId() {
+        return operId;
+    }
+
+    public void setOperId(String operId) {
+        this.operId = operId;
     }
 }
