@@ -47,6 +47,7 @@
   <!--  &lt;!&ndash; DAO接口所在包名，Spring会自动查找其下的类 &ndash;&gt;-->
   <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="com.cms" />
+        <!--Mapper扫描器会只扫描带有实现了BaseDao的接口 -->
         <property name="markerInterface" value="com.cms.base.dao.BaseDao"></property>
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
     </bean>
