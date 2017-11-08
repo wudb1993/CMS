@@ -4,9 +4,22 @@
 
     <select id="querySystemArticle" parameterType="map" resultType="com.cms.login.dto.Article">
         select * from pp_article_info
-        where noticeType =#{noticeType}
+        where
+        <if test="noticeType!-null and noticeType!=''">
+            noticeType =#{noticeType}
+        </if>
         <if test="title!=null and title!=''">
             and title LIKE concat('%',#{title},'%')
+        </if>
+        <if test="startTime!=null and startTime!=''">
+            <![CDATA[
+	           and investTime >= #{startTime}
+	        ]]>
+        </if>
+        <if test="endTime!=null and endTime!=''">
+            <![CDATA[
+	            and investTime <= #{endTime}
+	        ]]>
         </if>
     </select>
 
