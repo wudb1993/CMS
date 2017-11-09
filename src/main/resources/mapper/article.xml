@@ -5,7 +5,7 @@
     <select id="querySystemArticle" parameterType="map" resultType="com.cms.login.dto.Article">
         select * from pp_article_info
         where
-        <if test="noticeType!-null and noticeType!=''">
+        <if test="noticeType!=null and noticeType!=''">
             noticeType =#{noticeType}
         </if>
         <if test="title!=null and title!=''">

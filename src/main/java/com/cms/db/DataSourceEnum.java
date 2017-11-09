@@ -8,9 +8,9 @@ package com.cms.db;
 public enum DataSourceEnum {
 
 	// 主库
-	MASTER("masterDataSource", true),
+	MASTER("masterDataSource", false),
 	// 从库
-	SLAVE("slaveDataSource", false),;
+	SLAVE("slaveDataSource", true),;
 
 	/**
 	 * 	数据源名称

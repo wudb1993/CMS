@@ -68,7 +68,7 @@
                 <entry value-ref="masterDataSource" key="masterDataSource"></entry>
             </map>
         </property>
-        <property name="defaultTargetDataSource" ref="masterDataSource"></property>
+        <property name="defaultTargetDataSource" ref="slaveDataSource"></property>
     </bean>
 
     <!--spring和MyBatis完美整合，不需要mybatis的配置映射文件-->

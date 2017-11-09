@@ -38,7 +38,7 @@ public class DynamicDataSource extends AbstractRoutingDataSource {
 		String dataSource = contextHolder.get();
 		// 如果没有指定数据源，使用默认数据源
 		if (null == dataSource) {
-			DynamicDataSource.setDataSource(DataSourceEnum.MASTER.getDefault());
+			DynamicDataSource.setDataSource(DataSourceEnum.SLAVE.getDefault());
 		}
 		return contextHolder.get();
 	}

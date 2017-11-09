@@ -9,7 +9,10 @@ layui.config({
 
 	//加载页面数据
 	var newsData = '';
-	$.get("/systemNotice/queryArticle.do",{noticeType:'1'}, function(data){
+    var param = {
+        noticeType:"1"
+    };
+	$.get("/systemNotice/queryArticle.do",{param:JSON.stringify(param)}, function(data){
 		console.log(data.model);
 		data = data.model.articleList;
 		var newArray = [];
@@ -48,7 +51,7 @@ layui.config({
                 var selectStr = $(".search_input").val();
                 var param = {
                     noticeType:'1',
-						title:selectStr
+					title:selectStr
                 };
             	$.ajax({
 					url : "/systemNotice/queryArticle.do",

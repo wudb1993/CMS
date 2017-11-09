@@ -33,10 +33,22 @@ public class SystemNoticeController {
     public ModelAndView queryArticel(@RequestParam String param){
         ModelAndView mv = new ModelAndView();
         JSONObject paramList = JSONObject.fromObject(param);
-        String noticeType = paramList.getString("noticeType");
-        String title = paramList.getString("title");
-        String startTime = paramList.getString("startTime");
-        String endTime = paramList.getString("endTime");
+        String noticeType = "";
+        String title ="";
+        String startTime = "";
+        String endTime = "";
+        if( paramList.get("noticeType")!=null) {
+            noticeType = paramList.getString("noticeType");
+        }
+        if(paramList.get("title")!=null){
+            title = paramList.getString("title");
+        }
+       if(paramList.get("startTime")!=null){
+           startTime = paramList.getString("startTime");
+       }
+       if(paramList.get("endTime")!=null) {
+           endTime = paramList.getString("endTime");
+       }
         Map<String,Object> articleMap = new HashMap<String,Object>();
         articleMap.put("noticeType",noticeType);
         articleMap.put("title",title.trim());
