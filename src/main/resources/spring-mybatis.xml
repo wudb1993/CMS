@@ -3,13 +3,13 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:p="http://www.springframework.org/schema/p"
        xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
                         http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
                         http://www.springframework.org/schema/context
                         http://www.springframework.org/schema/context/spring-context-3.1.xsd
                         http://www.springframework.org/schema/tx
-                        http://www.springframework.org/schema/tx/spring-tx.xsd">
+                        http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
     <!-- 自动扫描 -->
     <context:component-scan base-package="com.cms" annotation-config="true">
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
@@ -91,12 +91,39 @@
     <!-- (事务管理)transaction manager, use JtaTransactionManager for global tx -->
     <!--<tx:annotation-driven transaction-manager="transactionManager"	proxy-target-class="true" mode="proxy" />-->
     <tx:annotation-driven transaction-manager="transactionManager"/>
+
+
+    <!-- 主动库数据源切换 峰向标-->
+    <!--<bean id="dataSourceAdvice" class="com.cms.db.DataSourceInterceptor" />-->
+
+    <!--数据源自动切换切面-->
+    <aop:config>
+        <aop:pointcut id="dataSourceAutoChange" expression="execution(* com.cms.service..*(..))" />
+        <aop:advisor pointcut-ref="dataSourceAutoChange" advice-ref="dataSourceInterceptor" />
+    </aop:config>
+    <!-- 主动库数据源切换 报表 -->
+    <bean id="dataSourceInterceptor" class="com.cms.db.DataSourceInterceptor"/>
+
     <bean id="transactionManager"
           class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="apiDataSource" />
     </bean>
-
-    <!-- 主动库数据源切换 -->
-    <bean id="dataSourceAdvice" class="com.cms.db.DataSourceInterceptor" />
-
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="delete*" propagation="REQUIRED" read-only="false"
+                       rollback-for="java.lang.Exception"/>
+            <tx:method name="insert*" propagation="REQUIRED" read-only="false"
+                       rollback-for="java.lang.Exception" />
+            <tx:method name="update*" propagation="REQUIRED" read-only="false"
+                       rollback-for="java.lang.Exception" />
+            <tx:method name="save*" propagation="REQUIRED" read-only="false"
+                       rollback-for="java.lang.Exception" />
+        </tx:attributes>
+    </tx:advice>
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+    <!-- 事物处理 -->
+    <aop:config>
+        <aop:pointcut id="pc" expression="execution(* com.cms.service..*(..))" />
+        <aop:advisor pointcut-ref="pc" advice-ref="txAdvice" />
+    </aop:config>
 </beans>

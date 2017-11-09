@@ -16,9 +16,13 @@ public class DataSourceInterceptor implements MethodInterceptor{
 	
 	@Override
 	public Object invoke(MethodInvocation invocation) throws Throwable {
-		//选择从数据源
-		DynamicDataSource.setDataSource(DataSourceEnum.SLAVE.getName());
-        Object returnValue=null;
+		DataSourceSelector annotation = invocation.getMethod().getAnnotation(DataSourceSelector.class);
+		if(annotation != null) {
+			DynamicDataSource.setDataSource(annotation.name());
+		}else{
+			DynamicDataSource.setDataSource(DataSourceEnum.SLAVE.getName());
+		}
+		Object returnValue=null;
 		try {
 			returnValue = invocation.proceed();
 		} catch (Exception e) {
@@ -29,7 +33,7 @@ public class DataSourceInterceptor implements MethodInterceptor{
 		}
 		// 正常情况也必须 clear 数据源，采用默认的数据源
 		DynamicDataSource.clearDataSource();
-        return returnValue;
+		return returnValue;
 	}
 
 }
