@@ -93,7 +93,7 @@
     <tx:annotation-driven transaction-manager="transactionManager"/>
 
 
-    <!-- 主动库数据源切换 峰向标-->
+    <!-- 主动库数据源切换 峰向标版本-->
     <!--<bean id="dataSourceAdvice" class="com.cms.db.DataSourceInterceptor" />-->
 
     <!--数据源自动切换切面-->
@@ -101,7 +101,7 @@
         <aop:pointcut id="dataSourceAutoChange" expression="execution(* com.cms.service..*(..))" />
         <aop:advisor pointcut-ref="dataSourceAutoChange" advice-ref="dataSourceInterceptor" />
     </aop:config>
-    <!-- 主动库数据源切换 报表 -->
+    <!-- 主动库数据源切换 报表版本 -->
     <bean id="dataSourceInterceptor" class="com.cms.db.DataSourceInterceptor"/>
 
     <bean id="transactionManager"
