@@ -17,4 +17,11 @@ public interface SystemNoticeDao extends BaseDao<Article,Long> {
      * 查询系统公告
      */
     List<Article> queryNotice(Map<String,Object> noticeMap);
+
+    /**
+     * 新增文章
+     * @param conditions
+     * @return
+     */
+    int saveArticle(Map<String,Object> conditions);
 }

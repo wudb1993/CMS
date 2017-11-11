@@ -23,5 +23,29 @@
         </if>
     </select>
 
+    <insert id="saveArticle" parameterType="map" >
+        INSERT  INTO  pp_article_info(
+        title,
+        userId,
+        author,
+        content,
+        general,
+        investTime,
+        status,
+        noticeType
+        )
+        VALUES (
+        #{title},
+        #{userId},
+        #{author},
+        #{content},
+        #{general},
+        #{investTime},
+        #{status},
+        #{noticeType}
+        )
+
+    </insert>
+
 
 </mapper>

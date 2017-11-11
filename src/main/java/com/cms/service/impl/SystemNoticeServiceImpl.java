@@ -1,8 +1,8 @@
-package com.cms.login.service.impl;
+package com.cms.service.impl;
 
 import com.cms.login.dao.SystemNoticeDao;
 import com.cms.login.dto.Article;
-import com.cms.login.service.SystemNoticeService;
+import com.cms.service.SystemNoticeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +15,7 @@ import java.util.Map;
  * @date 2017-11-03
  */
 @Service(value="systemNoticeService")
-public class SystemNoticeServiceImpl implements SystemNoticeService{
+public class SystemNoticeServiceImpl implements SystemNoticeService {
     @Autowired
     private SystemNoticeDao systemNoticeDaoImpl;
 
@@ -28,5 +28,19 @@ public class SystemNoticeServiceImpl implements SystemNoticeService{
     public List<Article> queryArticle(Map<String,Object> articelMap) {
         List<Article> articleList = systemNoticeDaoImpl.queryNotice(articelMap);
         return articleList;
+    }
+
+    /**
+     * 新增文章
+     * @param conditions
+     * @return
+     */
+    @Override
+    public String saveArtice(Map<String, Object> conditions) {
+        int result = systemNoticeDaoImpl.saveArticle(conditions);
+        if(result>0){
+            return "success";
+        }
+        return "false";
     }
 }

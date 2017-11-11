@@ -25,4 +25,10 @@ public class SystemNoticeDaoImpl extends BaseDaoImpl<Article,Long> implements Sy
        List<Article> articleList = getSqlSession().selectList("article.querySystemArticle",noticeMap);
         return articleList;
     }
+
+    @Override
+    public int saveArticle(Map<String,Object> conditions){
+        int result = getSqlSession().insert("article.saveArticle",conditions);
+        return  result;
+    }
 }

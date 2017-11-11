@@ -10,7 +10,7 @@ layui.config({
 	//加载页面数据
 	var newsData = '';
     var param = {
-        noticeType:"1"
+        noticeType:"2"
     };
 	$.get("/systemNotice/queryArticle.do",{param:JSON.stringify(param)}, function(data){
 		console.log(data.model);

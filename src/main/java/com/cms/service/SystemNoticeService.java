@@ -1,8 +1,6 @@
-package com.cms.login.service;
+package com.cms.service;
 
-import com.cms.login.dao.SystemNoticeDao;
 import com.cms.login.dto.Article;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 import java.util.Map;
@@ -19,5 +17,12 @@ public interface SystemNoticeService {
      * @param articleMap
      * @return
      */
-    List<Article> queryArticle(Map<String,Object> articleMap);
+    List<Article> queryArticle(Map<String, Object> articleMap);
+
+    /**
+     * 新增文章
+     * @param conditions
+     * @return
+     */
+    String saveArtice(Map<String,Object> conditions);
 }
