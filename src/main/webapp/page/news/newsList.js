@@ -10,7 +10,7 @@ layui.config({
 	//加载页面数据
 	var newsData = '';
     var param = {
-        noticeType:"2"
+        noticeType:"1"
     };
 	$.get("/systemNotice/queryArticle.do",{param:JSON.stringify(param)}, function(data){
 		console.log(data.model);
@@ -140,7 +140,25 @@ layui.config({
 				}
 			})			
 			layui.layer.full(index);
-		})
+		});
+
+        $(".news_edit").click(function(){
+            var index = layui.layer.open({
+                title : "编辑文章",
+                type : 2,
+                content : "newsEdit.html",
+                success : function(layero, index){
+
+                    setTimeout(function(){
+                        layui.layer.tips('点击此处返回文章列表', '.layui-layer-setwin .layui-layer-close', {
+                            tips: 3
+                        });
+                    },500)
+                }
+            })
+            layui.layer.full(index);
+        })
+
 	}).resize();
 
 	//推荐文章
@@ -234,17 +252,60 @@ layui.config({
 
 	//是否展示
 	form.on('switch(isShow)', function(data){
+		console.log(data);
+        console.log(data.elem.id);
+        console.log(data.value);
 		var index = layer.msg('修改中，请稍候',{icon: 16,time:false,shade:0.8});
-        setTimeout(function(){
-            layer.close(index);
-			layer.msg("展示状态修改成功！");
-        },2000);
+		var status =data.value=="on" ? "2" : "1";
+		var articleId = data.elem.id;
+        var param={
+        	"status":status,
+			"articleId":articleId
+		}
+		console.log(param);
+        $.get("/systemNotice/updateArticleList.do",{param:JSON.stringify(param)}, function(data1){
+            console.log(data1.model);
+            if(data1.model.result=="SUCCESS"){
+                layer.close(index);
+                layer.msg(data1.model.fault);
+			}else{
+            	if(data.value=="on"){
+                    data.elem.checked=false;
+				}else{
+                    data.elem.checked=true;
+				}
+                form.render(null,'isShow');
+                layer.close(index);
+                layer.msg(data1.model.fault);
+			}
+
+        },"json")
+
 	})
  
 	//操作
 	$("body").on("click",".news_edit",function(){  //编辑
-		layer.alert('您点击了文章编辑按钮，由于是纯静态页面，所以暂时不存在编辑内容，后期会添加，敬请谅解。。。',{icon:6, title:'文章编辑'});
-	})
+		var _this=$(this);
+            var index = layui.layer.open({
+                title : "编辑文章",
+                type : 2,
+                content : "newsEdit.html",
+                success : function(layero, index){
+                    var body = layer.getChildFrame('body', index);
+                    var iframeWin = window[layero.find('iframe')[0]['name']];
+                   // iframeWin.getId($(".news_edit").attr("id"));
+                    iframeWin.getId(_this.attr("data-id"));
+                    setTimeout(function(){
+                        layui.layer.tips('点击此处返回文章列表', '.layui-layer-setwin .layui-layer-close', {
+                            tips: 3
+                        });
+                    },500)
+                }
+            })
+            layui.layer.full(index);
+        })
+
+
 
 	$("body").on("click",".news_collect",function(){  //收藏.
 		if($(this).text().indexOf("已收藏") > 0){
@@ -285,19 +346,21 @@ layui.config({
 			    	+'<td><input type="checkbox" name="checked" lay-skin="primary" lay-filter="choose"></td>'
 			    	+'<td align="left">'+currData[i].title+'</td>'
 			    	+'<td>'+currData[i].author+'</td>';
-                     //    +'<td>'+'</td>';
-			    	if(currData[i].status == "1"){
-			    		dataHtml += '<td style="color:#f00">待审核</td>';
+			    	if(currData[i].permission == "1"){
+                        dataHtml+='<td style="color:#f00">开放浏览</td>';
 			    	}else{
-			    		dataHtml += '<td>审核通过</td>';
+                        dataHtml+= '<td>会员浏览</td>';
 			    	}
-			    	dataHtml += '<td>开放浏览 </td>'
-			    	+'<td><input type="checkbox" name="show" lay-skin="switch" lay-text="是|否" lay-filter="isShow" value="1" checked></td>'
-			    	+'<td id="ddd">'+ currData[i].operTime +'</td>'
+			    	if(currData.status=="2"){
+                        dataHtml+='<td><input type="checkbox" name="show"  id="'+currData[i].id+'" lay-skin="switch" lay-text="是|否" lay-filter="isShow"   checked ></td>';
+                    }else{
+                        dataHtml+='<td><input type="checkbox" name="show"  id="'+currData[i].id+'"   lay-skin="switch" lay-text="是|否" lay-filter="isShow"></td>';
+                    }
+                    dataHtml+='<td id="ddd">'+ currData[i].investTime +'</td>'
 			    	+'<td>'
-					+  '<a class="layui-btn layui-btn-mini news_edit"><i class="iconfont icon-edit"></i> 编辑</a>'
+					+  '<a class="layui-btn layui-btn-mini news_edit" data-id="'+currData[i].id+'" id="'+currData[i].id+'"><i class="iconfont icon-edit" ></i> 编辑</a>'
 					+  '<a class="layui-btn layui-btn-normal layui-btn-mini news_collect"><i class="layui-icon">&#xe600;</i> 收藏</a>'
-					+  '<a class="layui-btn layui-btn-danger layui-btn-mini news_del" data-id="'+data[i].id+'"><i class="layui-icon">&#xe640;</i> 删除</a>'
+					+  '<a class="layui-btn layui-btn-danger layui-btn-mini news_del" id="'+currData[i].id+'"><i class="layui-icon">&#xe640;</i> 删除</a>'
 			        +'</td>'
 			    	+'</tr>';
 

@@ -1,5 +1,6 @@
 package com.cms.service.impl;
 
+import com.cms.db.DataSourceSelector;
 import com.cms.login.dao.SystemNoticeDao;
 import com.cms.login.dto.Article;
 import com.cms.service.SystemNoticeService;
@@ -36,11 +37,28 @@ public class SystemNoticeServiceImpl implements SystemNoticeService {
      * @return
      */
     @Override
+    @DataSourceSelector(name="masterDataSource")
     public String saveArtice(Map<String, Object> conditions) {
         int result = systemNoticeDaoImpl.saveArticle(conditions);
         if(result>0){
             return "success";
         }
         return "false";
+    }
+
+    /**
+     * 更新文章内容
+     * @param article
+     * @return
+     */
+    @Override
+    @DataSourceSelector(name="masterDataSource")
+    public String updateArticle(Article article) {
+        int result = systemNoticeDaoImpl.updateArticle(article);
+        if(result>0){
+            return "SUCCESS";
+        }else {
+            return "FAULT";
+        }
     }
 }

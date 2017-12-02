@@ -4,9 +4,12 @@
 
     <select id="querySystemArticle" parameterType="map" resultType="com.cms.login.dto.Article">
         select * from pp_article_info
-        where
+        where 1=1
+        <if test="id!=null and id!=''">
+           and id =#{id}
+        </if>
         <if test="noticeType!=null and noticeType!=''">
-            noticeType =#{noticeType}
+          and  noticeType =#{noticeType}
         </if>
         <if test="title!=null and title!=''">
             and title LIKE concat('%',#{title},'%')
@@ -32,7 +35,8 @@
         general,
         investTime,
         status,
-        noticeType
+        noticeType,
+        permission
         )
         VALUES (
         #{title},
@@ -42,10 +46,23 @@
         #{general},
         #{investTime},
         #{status},
-        #{noticeType}
+        #{noticeType},
+        #{permission}
         )
-
     </insert>
 
+    <update id="updateArticle" parameterType="com.cms.login.dto.Article" >
+        UPDATE  pp_article_info
+        SET   title =  #{title},
+        userId = #{userId},
+        author = #{author},
+        content =  #{content},
+        general = #{general},
+        investTime = #{investTime},
+        status =#{status} ,
+        noticeType = #{noticeType},
+        permission = #{permission}
+        WHERE id=#{id}
+    </update>
 
 </mapper>

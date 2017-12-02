@@ -24,4 +24,11 @@ public interface SystemNoticeDao extends BaseDao<Article,Long> {
      * @return
      */
     int saveArticle(Map<String,Object> conditions);
+
+    /**
+     * 更新文章
+     * @param article
+     * @return
+     */
+    int updateArticle(Article article);
 }

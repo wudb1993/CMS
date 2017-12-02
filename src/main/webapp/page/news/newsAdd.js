@@ -14,11 +14,12 @@ layui.config({
  	form.on("submit(addNews)",function(data){
  		var param ={
  			"title" : $(".newsName").val(),
-			"status" : $(".newsLook").val(),
+			"permission" : $(".newsLook").val(),
             // var isShow = data.field.show=="on" ? "checked" : "",
             // "status" : $(".newsStatus").val()=="on" ? "2" : "3",
             "general" : $(".layui-textarea").val(),
-            "content" : $("#news_content").val()
+            "content" : $("#news_content").val(),
+            "noticeType":"1"
 		}
         $.ajax({
             url:'/systemNotice/saveArticle.do',
