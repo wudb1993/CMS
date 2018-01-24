@@ -15,6 +15,7 @@ public class Article {
     private String content;//详情
     private String general;//概要
     private Date investTime;//创建时间
+    private String permission;//权限
     private String status;//状态
     private String operMan;//审核人
     private Date operTime; //审核时间

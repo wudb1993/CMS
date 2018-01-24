@@ -93,7 +93,7 @@
     <tx:annotation-driven transaction-manager="transactionManager"/>
 
 
-    <!-- 主动库数据源切换 峰向标版本-->
+    <!-- 主动库数据源切换 *****标版本-->
     <!--<bean id="dataSourceAdvice" class="com.cms.db.DataSourceInterceptor" />-->
 
     <!--数据源自动切换切面-->

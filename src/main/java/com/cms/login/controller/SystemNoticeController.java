@@ -57,6 +57,8 @@ public class SystemNoticeController {
         Map<String,Object> articleMap = new HashMap<String,Object>();
         articleMap.put("noticeType",noticeType);
         articleMap.put("title",title.trim());
+        articleMap.put("startTime",startTime);
+        articleMap.put("endTime",endTime);
         List<Article> articleList = systemNoticeService.queryArticle(articleMap);
         mv.addObject("articleList",articleList);
         return mv;
