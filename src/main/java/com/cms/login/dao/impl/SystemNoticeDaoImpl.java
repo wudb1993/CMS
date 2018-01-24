@@ -31,4 +31,15 @@ public class SystemNoticeDaoImpl extends BaseDaoImpl<Article,Long> implements Sy
         int result = getSqlSession().insert("article.saveArticle",conditions);
         return  result;
     }
+
+    /**
+     * 更新文章内容
+     * @param article
+     * @return
+     */
+    @Override
+    public int updateArticle(Article article) {
+        int result  = getSqlSession().update("article.updateArticle",article);
+        return result;
+    }
 }

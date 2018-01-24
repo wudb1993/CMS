@@ -25,4 +25,11 @@ public interface SystemNoticeService {
      * @return
      */
     String saveArtice(Map<String,Object> conditions);
+
+    /**
+     * 更新文章内容
+     * @param article
+     * @return
+     */
+    String updateArticle(Article article);
 }

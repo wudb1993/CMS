@@ -8,7 +8,7 @@ import java.util.Date;
  * @date 2017-11-03
  */
 public class Article {
-    private String id;
+    private long id;
     private String title;//标题
     private String userId;//作者ID
     private String author;//作者
@@ -21,6 +21,28 @@ public class Article {
     private Date operTime; //审核时间
     private String noticeType;//文章类型
     private String operId;//操作员ID
+    private String permission ;//权限
+
+    public long getId() {
+        return id;
+    }
+    public void setId(long id) {
+        this.id = id;
+    }
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+    public String getPermission() {
+        return permission;
+    }
+
+    public void setPermission(String permission) {
+        this.permission = permission;
+    }
 
 
     public Date getOperTime() {
@@ -85,14 +107,6 @@ public class Article {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getNoticeType() {
